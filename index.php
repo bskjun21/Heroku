@@ -8,7 +8,7 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv
 //  CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 //  LINE Messaging APIがリクエストに付与した署名を取得
-$signature = $_SERVER['HTTP_' . \LINE\LINBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 //  署名が正当かチェック。政党であればリクエストをパース配列へ
 $event = $bot->paeseEventRequest(file_get_contents('php://input'), $signature);
 
