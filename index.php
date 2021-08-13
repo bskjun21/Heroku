@@ -9,11 +9,25 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET
 //  LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 //  署名が正当かチェック。政党であればリクエストをパース配列へ
-$event = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
 //  配列に格納された各イベントをループで処理
-foreach ($event as $event){
+foreach ($events as $event){
   //  テキストを返信
-  $bot->replyText($event->getReplyToken(), 'かれん');
+  //  $bot->replyText($event->getReplyToken(), 'かれん');
+  replyTextMessage($bot, $event->getReplyToken(), 'かれん')
+}
+
+//  テキストを返信。引数はLINEBot、返信先、テキスト
+function replyTextMessage($bot, $replyToken, $text){
+  //  返信を行いレスポンスを取得
+  //  TextMessageBuilderの引数はテキスト
+  $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text));
+  
+  //  レスポンスが異常な場合
+  if (!$response->isSucceeded()){
+    //  エラー内容の出力
+    error_log('Failed! '. $response->getHTTPStatus . ' ' . $response->getRawBody());
+  }
 }
 ?>
