@@ -16,9 +16,9 @@ foreach ($events as $event){
   //  テキストを返信
   //replyTextMessage($bot, $event->getReplyToken(), 'かれん');
   replyImageMessage($bot, $event->getReplyToken(), 'https://' .
-                    $SERVER['HTTP_HOST'] .
+                    $_SERVER['HTTP_HOST'] .
                     '/imgs/original.jpg', 
-                    'https://' . $SERVER['HTTP_HOST'] .
+                    'https://' . $_SERVER['HTTP_HOST'] .
                     '/imgs/preview.jpg'); 
 }
 
