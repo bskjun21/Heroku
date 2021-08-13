@@ -15,7 +15,7 @@ $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 foreach ($events as $event){
   //  テキストを返信
   //replyTextMessage($bot, $event->getReplyToken(), 'かれん');
-  replyImageMessage($bot, $event->replyToken(), 'https://' .
+  replyImageMessage($bot, $event->getReplyToken(), 'https://' .
                     $SERVER['HTTP_HOST'] .
                     '/imgs/original.jpg', 
                     'https://' . $SERVER['HTTP_HOST'] .
