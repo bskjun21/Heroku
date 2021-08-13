@@ -15,11 +15,12 @@ $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 foreach ($events as $event){
   //  テキストを返信
   //replyTextMessage($bot, $event->getReplyToken(), 'かれん');
+  $index = random_int(0,2);
   replyImageMessage($bot, $event->getReplyToken(), 'https://' .
                     $_SERVER['HTTP_HOST'] .
-                    '/imgs/original.jpg', 
+                    '/imgs/original' . $index . '.jpg', 
                     'https://' . $_SERVER['HTTP_HOST'] .
-                    '/imgs/preview.jpg'); 
+                    '/imgs/preview' . $index . '.jpg', ); 
 }
 
 //  テキストを返信。引数はLINEBot、返信先、テキスト
